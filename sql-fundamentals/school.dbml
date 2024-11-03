@@ -1,0 +1,77 @@
+Table school {
+  name varchar(25) [pk, not null]
+  street_name varchar(25)
+  city varchar(25)
+  postcode varchar(10)
+  google_map_link varchar(50)
+  telephone varchar(15)
+  email varchar(50) [not null]
+  hours varchar(25)
+  rating varchar(25)
+}
+
+Table person {
+  id integer [pk, not null]
+  first_name varchar(20) [not null]
+  last_name varchar(20) [not null]
+  email varchar(50) // optional
+}
+
+Table staff {
+  id integer [pk, not null]
+  person_id integer [ref: < person.id, not null]  // 1-many
+  school_name varchar(25) [ref: < school.name, not null]  // 1-many
+}
+
+Table department {
+  name varchar(50) [pk, not null]
+  school_name varchar(25) [ref: < school.name, not null]  // 1-many
+}
+
+Table job {
+  job_title varchar(50) [pk, not null]
+  department_name varchar(50) [ref: < department.name, not null] // 1-many
+}
+
+Table staff_job {
+  staff_id integer [ref: <> staff.id, not null]  // many-many
+  job_title varchar(50) [ref: <> job.job_title, not null]  // many-many
+
+  indexes {
+    (staff_id, job_title) [pk]  // Composite pk
+  }
+}
+
+Table tutor_group {
+  group_code varchar(3) [pk, not null, unique]
+}
+
+Table student {
+  id integer [pk, not null]
+  person_id integer [ref: < person.id, not null]  // 1-many
+  school_name varchar(25) [ref: < school.name, not null]  // 1-many
+  tutor_group varchar(3) [ref: < tutor_group.group_code, not null]  // 1-many
+  year_group integer [not null]
+}
+
+Table subject {
+  subject varchar(50) [pk, not null]
+}
+
+Table student_subject_choice {
+  student_id integer [ref: < student.id, not null]
+  subject_choice varchar(50) [ref: < subject.subject, not null]
+
+  indexes {
+    (student_id, subject_choice) [pk]  // Composite pk
+  }
+}
+
+Table governor {
+  id integer [pk, not null]
+  person_id integer [ref: < person.id, not null]
+  job_title varchar(50) [ref: < job.job_title, not null]
+  school_name varchar(25) [ref: < school.name, not null]
+  start_date date [not null]
+  end_date date [not null]
+}
