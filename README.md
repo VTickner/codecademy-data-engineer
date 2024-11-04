@@ -36,9 +36,9 @@ I have previously completed a number of the projects within [Python Fundamentals
   - [Hacking The Fender](#hacking-the-fender) \*
   - [Coded Correspondence](#coded-correspondence) (TODO)
   - [Thread Shed](#thread-shed) \*
-  - [Abruptly Goblins](#abruptly-goblins) (TODO)
+  - [Abruptly Goblins](#abruptly-goblins)
   - [Scrabble](#scrabble) \*
-  - [Basta Fazoolin'](#basta-fazoolin) (TODO)
+  - [Basta Fazoolin'](#basta-fazoolin)
   - [Getting Ready For Physics Class](#getting-ready-for-physics-class) \*
   - [Time Travelers Toolkit](#time-travelers-toolkit)
   - [Carly's Clippers](#carlys-clippers) \*
@@ -274,11 +274,13 @@ The aim of this project was to create a Python program that takes a list of sale
 
 ## Abruptly Goblins
 
-The aim of this project was to ... (TODO)
+The aim of this project was to install [Jupyter Notebook](https://jupyter.org/) and use it to write a program to work out which night the most people can attend for a gamers night.
+
+- `pip install notebook` and to run the notebook, I did `cd file_directory_name` and then `jupyter notebook` in the command line.
 
 ### Code & Potential Improvements
 
-- Solution URL: [Abruptly Goblins]() (TODO)
+- Solution URL: [Abruptly Goblins](./python-fundamentals/Abruptly%20Goblins%20Planner.ipynb)
 
 ## Scrabble
 
@@ -331,16 +333,15 @@ The aim of this project was to create a Python program that processes some data 
 
 ## Basta Fazoolin'
 
-The aim of this project was to create a Python program that uses classes and functions to work what menus are available at different times of day and to calculate bill costs.
+The aim of this project was to create a Python program that uses classes and functions to work out what menus are available at different times of day and to calculate bill costs. Classes defined for:
 
-- Classes defined for:
-  - Menu:
-    - String representation for name of menu and when it is available
-    - `calculate_bill()` calculates the cost of a particular meal
-  - Franchise:
-    - String representation for name of restaurant
-    - `available_menus()` works out which menus are currently available depending upon the time of day
-  - Business takes the name of the business and a list of its franchises.
+- Menu:
+  - String representation for name of menu and when it is available
+  - `calculate_bill()` calculates the cost of a particular meal
+- Franchise:
+  - String representation for name of restaurant
+  - `available_menus()` works out which menus are currently available depending upon the time of day
+- Business takes the name of the business and a list of its franchises.
 
 ### Code & Potential Improvements
 
