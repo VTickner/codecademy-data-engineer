@@ -40,7 +40,7 @@ I have previously completed a number of the projects within [Python Fundamentals
   - [Scrabble](#scrabble) \*
   - [Basta Fazoolin'](#basta-fazoolin) (TODO)
   - [Getting Ready For Physics Class](#getting-ready-for-physics-class) \*
-  - [Time Travelers Toolkit](#time-travelers-toolkit) (TODO)
+  - [Time Travelers Toolkit](#time-travelers-toolkit)
   - [Carly's Clippers](#carlys-clippers) \*
   - [Len's Slice](#lens-slice) \*
   - [Gradebook](#gradebook) \*
@@ -357,11 +357,27 @@ The aim of this project was to create a Python program that uses functions and `
 
 ## Time Travelers Toolkit
 
-The aim of this project was to ... (TODO)
+The aim of this project was to use imports and work with `datetime` to simulate time travel and to perform calculations using dates.
+
+- Created custom module that was imported into the main script.
+- Used list for possible destinations.
+- Use of `random`, `decimal`, `datetime` to carry out calculations:
+
+  ```python
+  base_cost = Decimal('1000.00')
+  current_year = current_date.year
+  start_year = -2000
+  end_year = 3500
+  target_year = randint(start_year, end_year)
+  cost_multiplier = abs(current_year - target_year)
+  final_cost = round(base_cost * cost_multiplier, 2)
+  ```
 
 ### Code & Potential Improvements
 
-- Solution URL: [Time Travelers Toolkit]() (TODO)
+- Solution URL: [Time Travelers Toolkit](./python-fundamentals/time_travelers_toolkit.py)
+- Other files:
+  - [custom_module.py](./python-fundamentals/custom_module.py)
 
 ## Carly's Clippers
 
