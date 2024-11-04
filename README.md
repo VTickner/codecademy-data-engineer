@@ -331,11 +331,20 @@ The aim of this project was to create a Python program that processes some data 
 
 ## Basta Fazoolin'
 
-The aim of this project was to ... (TODO)
+The aim of this project was to create a Python program that uses classes and functions to work what menus are available at different times of day and to calculate bill costs.
+
+- Classes defined for:
+  - Menu:
+    - String representation for name of menu and when it is available
+    - `calculate_bill()` calculates the cost of a particular meal
+  - Franchise:
+    - String representation for name of restaurant
+    - `available_menus()` works out which menus are currently available depending upon the time of day
+  - Business takes the name of the business and a list of its franchises.
 
 ### Code & Potential Improvements
 
-- Solution URL: [Basta Fazoolin']() (TODO)
+- Solution URL: [Basta Fazoolin'](./python-fundamentals/basta_fazoolin.py)
 
 ## Getting Ready For Physics Class
 
@@ -357,7 +366,7 @@ The aim of this project was to create a Python program that uses functions and `
 
 ## Time Travelers Toolkit
 
-The aim of this project was to use imports and work with `datetime` to simulate time travel and to perform calculations using dates.
+The aim of this project was to create a Python program that uses imports and work with `datetime` to simulate time travel and to perform calculations using dates.
 
 - Created custom module that was imported into the main script.
 - Used list for possible destinations.
