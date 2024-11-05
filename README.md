@@ -34,7 +34,7 @@ I have previously completed a number of the projects within [Python Fundamentals
   - [Create A Table](#create-a-table) \*
 - [Python Fundamentals](#python-fundamentals)
   - [Hacking The Fender](#hacking-the-fender) \*
-  - [Coded Correspondence](#coded-correspondence) (TODO)
+  - [Coded Correspondence](#coded-correspondence)
   - [Thread Shed](#thread-shed) \*
   - [Abruptly Goblins](#abruptly-goblins)
   - [Scrabble](#scrabble) \*
@@ -250,11 +250,39 @@ The aim of this project was to create a Python program that reads and writes to 
 
 ## Coded Correspondence
 
-The aim of this project was to ... (TODO)
+The aim of this project was to write Python functions using Jupyter Notebook to code and decode messages using a [Caesar Cipher](https://en.wikipedia.org/wiki/Caesar_cipher) and a [Vigenère Cipher](https://en.wikipedia.org/wiki/Vigen%C3%A8re_cipher).
+
+The Caesar Cipher is a simple offset cipher. However, I found the Vigenère Cipher more difficult to understand how to code as each letter has a different offset depending upon the key word used.
+
+```python
+def vigenere_decode(message, key):
+  decoded_message = ""
+  key_phrase = ""
+  key_index = 0
+
+  for char in message:
+    if key_index >= len(key):
+      key_index = 0
+    if char in alphabet:
+      key_phrase += key[key_index]
+      key_index += 1
+    else:
+      key_phrase += char
+
+  for i in range(len(message)):
+    if message[i] in alphabet:
+      old_char_index = alphabet.index(message[i])
+      offset_index = alphabet.index(key_phrase[i])
+      new_char = alphabet[(old_char_index + offset_index) % 26]
+      decoded_message += new_char
+    else:
+      decoded_message += message[i]
+  return decoded_message
+```
 
 ### Code & Potential Improvements
 
-- Solution URL: [Coded Correspondence]() (TODO)
+- Solution URL: [Coded Correspondence](./python-fundamentals/coded_correspondence.ipynb)
 
 ## Thread Shed
 
