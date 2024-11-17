@@ -22,7 +22,8 @@ I have previously completed a number of the projects within [Python Fundamentals
 - Getting Started Off-Platform
 - Data Wrangling, Cleaning And Tidying
 - Advanced SQL
-- Python Pandas
+- [Python Pandas](#python-pandas)
+  - [Petal Power Inventory](#petal-power-inventory)
 - [SQL Fundamentals](#sql-fundamentals) \*
   - [Building An Inventory Database With PostgreSQL](#building-an-inventory-database-with-postgresql) \*
   - [Designing A Database From Scratch](#designing-a-database-from-scratch) \*
@@ -48,6 +49,32 @@ I have previously completed a number of the projects within [Python Fundamentals
   - [Magic 8-Ball](#magic-8-ball) \*
 - [Other](#other)
   - [Author](#author)
+
+# Python Pandas
+
+## Petal Power Inventory
+
+The aim of this project was to use Pandas to analyse data from `inventory.csv`. A number of columns were added to the data to enhance the information that could be extracted from the data, and also making use of lambda functions:
+
+- `in_stock` column: makes use of `quantity` column to work out whether in stock i.e. `True` or `False
+- `total_value` column: makes use of `price` and `quantity` columns to calculate the total value
+- `full_description` column: makes use of and combines `product_type` and `product_description` columns to create a full description
+
+  ```python
+  inventory['in_stock'] = inventory.quantity.apply(lambda quantity: True if quantity > 0 else False)
+
+  inventory['total_value'] = inventory.price * inventory.quantity
+
+  combine_lambda = lambda row: \
+    '{} - {}'.format(row.product_type, row.product_description)
+  inventory['full_description'] = inventory.apply(combine_lambda, axis=1)
+  ```
+
+### Code & Potential Improvements
+
+- Solution URL: [Petal Blossom](./python-pandas/petal_blossom.py)
+- Other files:
+  - [inventory.csv](./python-pandas/inventory.csv)
 
 # SQL Fundamentals
 
