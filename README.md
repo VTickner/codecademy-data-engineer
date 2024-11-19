@@ -23,6 +23,7 @@ I have previously completed a number of the projects within [Python Fundamentals
 - Data Wrangling, Cleaning And Tidying
 - Advanced SQL
 - [Python Pandas](#python-pandas)
+  - [A/B Testing For ShoeFly.com](#ab-testing-for-shoeflycom)
   - [Petal Power Inventory](#petal-power-inventory)
 - [SQL Fundamentals](#sql-fundamentals) \*
   - [Building An Inventory Database With PostgreSQL](#building-an-inventory-database-with-postgresql) \*
@@ -52,21 +53,48 @@ I have previously completed a number of the projects within [Python Fundamentals
 
 # Python Pandas
 
+## A/B Testing For ShoeFly.com
+
+The aim of this project was to use Pandas to analyse data from `adclicks.csv`. It is an A/B testing on the number of people clicking on the ads of a hypothetical website called ShoeFly.com They have two different versions of an ad, which they have placed in emails, on Facebook, Twitter, and Google. Analysis of the data for the two ads was done to see how they are performing on each of the different platforms and on each day of the week.
+
+- `groupby()` was used to help organise the data for analysis e.g.
+  ```python
+  ad_clicks_by_source = ad_clicks.groupby('utm_source').user_id.count().reset_index()
+  ```
+- `pivot()` was used to pivot the data in order to make it more readable e.g.
+  ```python
+  clicks_pivot = clicks_by_source.pivot(
+    columns='is_click',
+    index='utm_source',
+    values='user_id'
+  ).reset_index()
+  print(clicks_pivot)
+  ```
+
+### Code & Potential Improvements
+
+- Solution URL: [A/B Testing For ShoeFly.com](./python-pandas/ab_testing_shoefly.py)
+- Other files:
+  - [adclicks.csv](./python-pandas/ad_clicks.csv)
+- I rounded the `percent_clicked` to 1dp in all the pivot tables where it was used e.g.
+  ```python
+  a_clicks_grouped['percent_clicked'] = round((a_clicks_grouped['user_id'] / a_clicks_grouped.groupby('day')['user_id'].transform('sum') * 100),1)
+  ```
+
 ## Petal Power Inventory
 
 The aim of this project was to use Pandas to analyse data from `inventory.csv`. A number of columns were added to the data to enhance the information that could be extracted from the data, and also making use of lambda functions:
 
-- `in_stock` column: makes use of `quantity` column to work out whether in stock i.e. `True` or `False
-- `total_value` column: makes use of `price` and `quantity` columns to calculate the total value
-- `full_description` column: makes use of and combines `product_type` and `product_description` columns to create a full description
+- `in_stock` column: makes use of `quantity` column to work out whether in stock i.e. `True` or `False`.
+- `total_value` column: makes use of `price` and `quantity` columns to calculate the total value.
+- `full_description` column: makes use of and combines `product_type` and `product_description` columns to create a full description.
 
   ```python
   inventory['in_stock'] = inventory.quantity.apply(lambda quantity: True if quantity > 0 else False)
 
   inventory['total_value'] = inventory.price * inventory.quantity
 
-  combine_lambda = lambda row: \
-    '{} - {}'.format(row.product_type, row.product_description)
+  combine_lambda = lambda row: '{} - {}'.format(row.product_type, row.product_description)
   inventory['full_description'] = inventory.apply(combine_lambda, axis=1)
   ```
 
