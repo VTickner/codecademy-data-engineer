@@ -23,6 +23,7 @@ I have previously completed a number of the projects within [Python Fundamentals
 - Data Wrangling, Cleaning And Tidying
 - Advanced SQL
 - [Python Pandas](#python-pandas)
+  - [Page Visits Funnel](#page-visits-funnnel)
   - [A/B Testing For ShoeFly.com](#ab-testing-for-shoeflycom)
   - [Petal Power Inventory](#petal-power-inventory)
 - [SQL Fundamentals](#sql-fundamentals) \*
@@ -53,15 +54,50 @@ I have previously completed a number of the projects within [Python Fundamentals
 
 # Python Pandas
 
+## Page Visits Funnnel
+
+The aim of this project was to use Pandas to analyse data regarding a websites funnel for `visits.csv`, `cart.csv`, `checkout.csv` and `purchase.csv`. The funnel describes the process of:
+
+1. A user visits the website
+1. A user adds a product to the cart
+1. A user clicks "checkout"
+1. A user completes a purchase
+
+Analysis was done on each step of the funnel to see how many people continue through the funnel and ultimately make a purchase.
+
+- `merge()` was used to help merge various DataFrames together e.g.
+
+  ```python
+  visits_cart = visits.merge(cart, how='left')
+  ```
+
+- `isnull()` was used to check which timestamps had `null` for that particular column, i.e. the user never went to the next funnel stage e.g.
+
+  ```python
+  null_purchases = len(checkout_purchase[checkout_purchase.purchase_time.isnull()])
+  ```
+
+### Code & Potential Improvements
+
+- Solution URL: [Page Visits Funnel](./python-pandas/page_visits_funnel.py)
+- Other files:
+  - [visits.csv](./python-pandas/visits.csv)
+  - [cart.sv](./python-pandas/cart.csv)
+  - [checkout.csv](./python-pandas/checkout.csv)
+  - [purchase.csv](./python-pandas/purchase.csv)
+
 ## A/B Testing For ShoeFly.com
 
 The aim of this project was to use Pandas to analyse data from `adclicks.csv`. It is an A/B testing on the number of people clicking on the ads of a hypothetical website called ShoeFly.com They have two different versions of an ad, which they have placed in emails, on Facebook, Twitter, and Google. Analysis of the data for the two ads was done to see how they are performing on each of the different platforms and on each day of the week.
 
 - `groupby()` was used to help organise the data for analysis e.g.
+
   ```python
   ad_clicks_by_source = ad_clicks.groupby('utm_source').user_id.count().reset_index()
   ```
+
 - `pivot()` was used to pivot the data in order to make it more readable e.g.
+
   ```python
   clicks_pivot = clicks_by_source.pivot(
     columns='is_click',
@@ -77,6 +113,7 @@ The aim of this project was to use Pandas to analyse data from `adclicks.csv`. I
 - Other files:
   - [adclicks.csv](./python-pandas/ad_clicks.csv)
 - I rounded the `percent_clicked` to 1dp in all the pivot tables where it was used e.g.
+
   ```python
   a_clicks_grouped['percent_clicked'] = round((a_clicks_grouped['user_id'] / a_clicks_grouped.groupby('day')['user_id'].transform('sum') * 100),1)
   ```
