@@ -17,13 +17,14 @@ I have previously completed a number of the projects within [Python Fundamentals
 - Learn Git: Introduction To Version Control
 - Advanced Python
 - Learn The Command Line
-- Intermediate Python
+- [Intermediate Python](#intermediate-python)
+  - [The Nile](#the-nile)
 - Introduction To Big Data With PySpark
 - Getting Started Off-Platform
 - Data Wrangling, Cleaning And Tidying
 - Advanced SQL
 - [Python Pandas](#python-pandas)
-  - [Page Visits Funnel](#page-visits-funnnel)
+  - [Page Visits Funnel](#page-visits-funnel)
   - [A/B Testing For ShoeFly.com](#ab-testing-for-shoeflycom)
   - [Petal Power Inventory](#petal-power-inventory)
 - [SQL Fundamentals](#sql-fundamentals) \*
@@ -52,9 +53,62 @@ I have previously completed a number of the projects within [Python Fundamentals
 - [Other](#other)
   - [Author](#author)
 
+# Intermediate Python
+
+## The Nile
+
+This project focused on building functions that calculate shipping costs, identify the cheapest available driver, and total the revenue from completed trips. The main learning goal was practising how to work with and manipulate different types of arguments — unpacking tuples, using default parameters, and working with `*args` and `**kwargs`.
+
+### 💡 Key Learning Points
+
+#### Unpacking tuples
+
+Coordinates needed to be unpacked so latitude and longitude values could be passed to calculate the distance:
+
+```python
+from_lat, from_long = from_coords
+to_lat, to_long = to_coords
+distance = get_distance(from_lat, from_long, to_lat,to_long)
+
+# Equivalent shorthand:
+distance = get_distance(*from_coords, *to_coords)
+```
+
+#### Using default parameters
+
+Default arguments ensure functions behave sensibly when optional information isn’t supplied. In the shipping cost calculator, the default `shipping_type` was `'Overnight'`:
+
+```python
+def calculate_shipping_cost(from_coords, to_coords, shipping_type='Overnight'):
+```
+
+#### Flexible arguments with `*args` and `**kwargs`
+
+Knowing when to use each is key:
+
+- `*args` → any number of positional, unnamed values → stored as a tuple. Use when you don't know how many unnamed values will be passed.
+  ```python
+  def calculate_driver_cost(distance, *drivers):
+    for driver in drivers:
+      ...
+  ```
+- `**kwargs` → any number of keyword arguments, named values → stored as a dictionary. Use when values are passed with names (keys).
+  ```python
+  def calculate_money_made(**trips):
+    for trip_id, trip in trips.items():
+      ...
+  ```
+
+### 💻 Code & Potential Improvements
+
+- Solution URL: [The Nile](./intermediate-python/the_nile.py)
+- Other files:
+  - [nile.py](./intermediate-python/nile.py)
+  - [test.py](./intermediate-python/test.py)
+
 # Python Pandas
 
-## Page Visits Funnnel
+## Page Visits Funnel
 
 The aim of this project was to use Pandas to analyse data regarding a websites funnel for `visits.csv`, `cart.csv`, `checkout.csv` and `purchase.csv`. The funnel describes the process of:
 
@@ -62,6 +116,8 @@ The aim of this project was to use Pandas to analyse data regarding a websites f
 1. A user adds a product to the cart
 1. A user clicks "checkout"
 1. A user completes a purchase
+
+### 💡 Key Learning Points
 
 Analysis was done on each step of the funnel to see how many people continue through the funnel and ultimately make a purchase.
 
@@ -77,7 +133,7 @@ Analysis was done on each step of the funnel to see how many people continue thr
   null_purchases = len(checkout_purchase[checkout_purchase.purchase_time.isnull()])
   ```
 
-### Code & Potential Improvements
+### 💻 Code & Potential Improvements
 
 - Solution URL: [Page Visits Funnel](./python-pandas/page_visits_funnel.py)
 - Other files:
@@ -89,6 +145,8 @@ Analysis was done on each step of the funnel to see how many people continue thr
 ## A/B Testing For ShoeFly.com
 
 The aim of this project was to use Pandas to analyse data from `adclicks.csv`. It is an A/B testing on the number of people clicking on the ads of a hypothetical website called ShoeFly.com They have two different versions of an ad, which they have placed in emails, on Facebook, Twitter, and Google. Analysis of the data for the two ads was done to see how they are performing on each of the different platforms and on each day of the week.
+
+### 💡 Key Learning Points
 
 - `groupby()` was used to help organise the data for analysis e.g.
 
@@ -107,7 +165,7 @@ The aim of this project was to use Pandas to analyse data from `adclicks.csv`. I
   print(clicks_pivot)
   ```
 
-### Code & Potential Improvements
+### 💻 Code & Potential Improvements
 
 - Solution URL: [A/B Testing For ShoeFly.com](./python-pandas/ab_testing_shoefly.py)
 - Other files:
@@ -126,16 +184,18 @@ The aim of this project was to use Pandas to analyse data from `inventory.csv`. 
 - `total_value` column: makes use of `price` and `quantity` columns to calculate the total value.
 - `full_description` column: makes use of and combines `product_type` and `product_description` columns to create a full description.
 
-  ```python
-  inventory['in_stock'] = inventory.quantity.apply(lambda quantity: True if quantity > 0 else False)
+### 💡 Key Learning Points
 
-  inventory['total_value'] = inventory.price * inventory.quantity
+```python
+inventory['in_stock'] = inventory.quantity.apply(lambda quantity: True if quantity > 0 else False)
 
-  combine_lambda = lambda row: '{} - {}'.format(row.product_type, row.product_description)
-  inventory['full_description'] = inventory.apply(combine_lambda, axis=1)
-  ```
+inventory['total_value'] = inventory.price * inventory.quantity
 
-### Code & Potential Improvements
+combine_lambda = lambda row: '{} - {}'.format(row.product_type, row.product_description)
+inventory['full_description'] = inventory.apply(combine_lambda, axis=1)
+```
+
+### 💻 Code & Potential Improvements
 
 - Solution URL: [Petal Blossom](./python-pandas/petal_blossom.py)
 - Other files:
@@ -159,7 +219,7 @@ To ensure data quality the following were utilised on the tables as appropriate:
 - `ADD PRIMARY KEY (column_name)`
 - `ADD FOREIGN KEY (column_name) REFERENCES table_name(column_name)`
 
-### Code & Potential Improvements
+### 💻 Code & Potential Improvements
 
 - Solution URL: [Building An Inventory Database With PostgreSQL](./sql-fundamentals/building_an_inventory_database_with_postgresql.sql)
 
@@ -180,7 +240,7 @@ I got ChatGPT to generate hypothetical data based of the schema:
 
 While using ChatGPT helped speed up the generation of data, it didn't keep the data consistent to what it was supposed to add for each individual. For instance, it added a staff member with a note to state they were an art teacher, but never added art teacher as a job. So there were some inconsistencies when trying to add the data that I needed to clear up when inserting data into the table.
 
-### Code & Potential Improvements
+### 💻 Code & Potential Improvements
 
 - Solution URL: [Designing A Database From Scratch](./sql-fundamentals/school.sql)
 
@@ -211,7 +271,7 @@ FROM information_schema.key_column_usage
 WHERE table_name = 'restaurant';
 ```
 
-### Code & Potential Improvements
+### 💻 Code & Potential Improvements
 
 - Solution URL: [Build A Menu For Bytes Of China](./sql-fundamentals/build_a_menu_for_bytes_of_china.sql)
 
@@ -236,7 +296,7 @@ The aim of this project was make queries to a database containing multiple table
     ON trips.rider_id = riders.id;
   ```
 
-### Code & Potential Improvements
+### 💻 Code & Potential Improvements
 
 - Solution URL: [Lyft Trip Data](./sql-fundamentals/lyft_trip_data.sql)
 
@@ -257,7 +317,7 @@ The aim of this project was make queries to a database table of Hacker News stor
   ORDER BY 2 DESC;
   ```
 
-### Code & Potential Improvements
+### 💻 Code & Potential Improvements
 
 - Solution URL: [Analyse Hacker News Trends](./sql-fundamentals/analyse_hacker_news_trends.sql)
 
@@ -271,7 +331,7 @@ The aim of this project was make queries using aggregate functions to a database
 - `GROUP BY column_name;`
 - `HAVING aggregrate function conditon;`
 
-### Code & Potential Improvements
+### 💻 Code & Potential Improvements
 
 - Solution URL: [Trends In Startups](./sql-fundamentals/trends_in_startups.sql)
 
@@ -300,7 +360,7 @@ The aim of this project was make queries to a database table of restaurant infor
   FROM nomnom;
   ```
 
-### Code & Potential Improvements
+### 💻 Code & Potential Improvements
 
 - Solution URL: [New York Restaurants](./sql-fundamentals/new_york_restaurants.sql)
 
@@ -315,7 +375,7 @@ The aim of this project was to create a friends table and add/delete data to it 
 - `ALTER TABLE table_name ADD COLUMN column_name data_type;`
 - `DELETE FROM table_name WHERE column_name = data;`
 
-### Code & Potential Improvements
+### 💻 Code & Potential Improvements
 
 - Solution URL: [Create A Table](./sql-fundamentals/create_a_table.sql)
 
@@ -331,7 +391,7 @@ The aim of this project was to create a Python program that reads and writes to 
 - `json.dump(dictionary_name, json_file_name)` used to write information to json file from Python dictionary.
 - `file_object.write("text_to_add")` used to write information to file.
 
-### Code & Potential Improvements
+### 💻 Code & Potential Improvements
 
 - Solution URL: [Hacking The Fender](./python-fundamentals/hacking_the_fender.py)
 - Other files:
@@ -372,7 +432,7 @@ def vigenere_decode(message, key):
   return decoded_message
 ```
 
-### Code & Potential Improvements
+### 💻 Code & Potential Improvements
 
 - Solution URL: [Coded Correspondence](./python-fundamentals/coded_correspondence.ipynb)
 
@@ -388,7 +448,7 @@ The aim of this project was to create a Python program that takes a list of sale
 - Function defined to calculate the total numbers sold for each colour thread.
 - `print` and `.format()` used to print out a formatted string of the number of each colour thread purchased.
 
-### Code & Potential Improvements
+### 💻 Code & Potential Improvements
 
 - Solution URL: [Thread Shed](./python-fundamentals/thread_shed.py)
 
@@ -398,7 +458,7 @@ The aim of this project was to install [Jupyter Notebook](https://jupyter.org/) 
 
 - `pip install notebook` and to run the notebook, I did `cd file_directory_name` and then `jupyter notebook` in the command line.
 
-### Code & Potential Improvements
+### 💻 Code & Potential Improvements
 
 - Solution URL: [Abruptly Goblins](./python-fundamentals/Abruptly%20Goblins%20Planner.ipynb)
 
@@ -444,7 +504,7 @@ The aim of this project was to create a Python program that processes some data 
 
   - `show_results()` iterates through `player_to_points` dictionary to print out names and total scores of each player.
 
-### Code & Potential Improvements
+### 💻 Code & Potential Improvements
 
 - Solution URL: [Scrabble](./python-fundamentals/scrabble.py)
   - Remove hardcoded player's data and ask for input of name and word from user - ADDED TO CODE.
@@ -463,7 +523,7 @@ The aim of this project was to create a Python program that uses classes and fun
   - `available_menus()` works out which menus are currently available depending upon the time of day
 - Business takes the name of the business and a list of its franchises.
 
-### Code & Potential Improvements
+### 💻 Code & Potential Improvements
 
 - Solution URL: [Basta Fazoolin'](./python-fundamentals/basta_fazoolin.py)
 
@@ -479,7 +539,7 @@ The aim of this project was to create a Python program that uses functions and `
   - Work
 - Values to test the program are hardcoded into the program.
 
-### Code & Potential Improvements
+### 💻 Code & Potential Improvements
 
 - Solution URL: [Getting Ready For Physics Class](./python-fundamentals/getting_ready_physics_class.py)
   - Have the user choose which physics property to calculate.
@@ -503,7 +563,7 @@ The aim of this project was to create a Python program that uses imports and wor
   final_cost = round(base_cost * cost_multiplier, 2)
   ```
 
-### Code & Potential Improvements
+### 💻 Code & Potential Improvements
 
 - Solution URL: [Time Travelers Toolkit](./python-fundamentals/time_travelers_toolkit.py)
 - Other files:
@@ -516,7 +576,7 @@ The aim of this project was to create a Python program that calculates some metr
 - Lists of hairstyles, prices and last week's sales are hardcoded into the program.
 - `for`, list comprehensions, `range()`, `len()` and `if` are used to calculate average prices, decreased prices, total revenue, average daily revenue and types of haircuts that cost less than £30.
 
-### Code & Potential Improvements
+### 💻 Code & Potential Improvements
 
 - Solution URL: [Carly's Clippers](./python-fundamentals/carlys_clippers.py)
 
@@ -532,7 +592,7 @@ The aim of this project was to create a Python program that takes pizzas and the
 - `list.insert(index, item)` to add a new pizza in appropriate position to keep price sorted in list.
 - `list[:3]` to find the cheapest three pizzas.
 
-### Code & Potential Improvements
+### 💻 Code & Potential Improvements
 
 - Solution URL: [Len's Slice](./python-fundamentals/lens_slice.py)
 
@@ -543,7 +603,7 @@ The aim of this project was to create a Python program that takes student data a
 - 2D lists of subjects and grades are hardcoded into the program.
 - `list.append(item)`, `list[index].remove(item)` are used to alter subjects and grades and `print()` out gradebook information to the user.
 
-### Code & Potential Improvements
+### 💻 Code & Potential Improvements
 
 - Solution URL: [Gradebook](./python-fundamentals/gradebook.py)
   - Have the user input the initial subjects and grades.
@@ -556,7 +616,7 @@ The aim of this project was to create a Python program that asks the user for th
 - `weight` variable is hardcoded into the program.
 - `if`, `elif` and `else` used to calculate cost shipping and `print()` out costs.
 
-### Code & Potential Improvements
+### 💻 Code & Potential Improvements
 
 - Solution URL: [Sal's Shipping](./python-fundamentals/shipping.py)
   - Have the user input the packages weight.
@@ -569,7 +629,7 @@ The aim of this project was to create a Python program that can answer any "Yes"
 - `random` module with `randint()` used to generate a random number within a specified range.
 - `if`, `elif` and `else` used to select answers and `print()` out appropriate response.
 
-### Code & Potential Improvements
+### 💻 Code & Potential Improvements
 
 - Solution URL: [Magic 8-Ball](./python-fundamentals/magic-8.py)
   - Have the user input their name and question.
